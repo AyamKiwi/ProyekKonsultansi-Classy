@@ -1,0 +1,146 @@
+{% extends "base.html"%}
+{% block content %} 
+<form method="POST">
+    <h3 align = "center">Admin</h3>
+    <div>
+        <label for="Ruangan">Ruangan</label>
+      </div>
+      <select type="ruangan" class="ruangan" name="ruangan">
+        <option selected disabled>Pilih Ruangan</option>
+
+        <option value="Bengkel Kerja Listrik E-104">Bengkel Kerja Listrik E-104</option>
+        <option value="Laboratorium Biologi Umum/Struktur Tumbuhan N-105">Laboratorium Biologi Umum/Struktur Tumbuhan N-105</option>
+        <option value="Bengkel Kerja Mekanik dan Gelas E-107">Bengkel Kerja Mekanik dan Gelas E-107</option>
+        <option value="Ruang Kreatif N-110">Ruang Kreatif N-110</option>
+        <option value="Laboratorium Fisiologi N-118">Laboratorium Fisiologi N-118</option>
+        <option value="Laboratorium Struktur Hewan N-205">Laboratorium Struktur Hewan N-205</option>
+        <option value="Laboratorium Mikrobiologi N-210">Laboratorium Mikrobiologi N-210</option>
+        <option value="Laboratorium Bumi dan Antariksa N-220">Laboratorium Bumi dan Antariksa N-220</option>
+        <option value="Ruang Kelas E-201">Ruang Kelas E-201</option>
+        <option value="Smart Classroom E-210">Smart Classroom E-210</option>
+        <option value="Ruang Kelas S-301">Ruang Kelas S-301</option>
+        <option value="Ruang Kelas S-302">Ruang Kelas S-302</option>
+        <option value="Ruang Kelas S-303">Ruang Kelas S-303</option>
+        <option value="Ruang Kelas S-304">Ruang Kelas S-304</option>
+        <option value="Ruang Kelas S-305">Ruang Kelas S-305</option>
+        <option value="Ruang Kelas S-306">Ruang Kelas S-306</option>
+        <option value="Ruang Kelas E-301">Ruang Kelas E-301</option>
+        <option value="Laboratorium Pengajaran MIPA Sek. Lanjutan E-302">Laboratorium Pengajaran MIPA Sek. Lanjutan E-302</option>
+        <option value="Ruang Komputer E-305">Ruang Komputer E-305</option>
+        <option value="Ruang Komputer E-306">Ruang Komputer E-306</option>
+        <option value="Laboratorium Elektronika N-305">Laboratorium Elektronika N-305</option>
+        <option value="Laboratorium Fisika Dasar N-309">Laboratorium Fisika Dasar N-309</option>
+        <option value="Laboratorium Fisika Lanjutan 1 N-313">Laboratorium Fisika Lanjutan 1 N-313</option>
+        <option value="Laboratorium Fisika Lanjutan 2 N-318">Laboratorium Fisika Lanjutan 2 N-318</option>
+        <option value="Laboratorium Kimia Dasar dan Analitik N-405">Laboratorium Kimia Dasar dan Analitik N-405</option>
+        <option value="Laboratorium Kimia Organik/Biokimia dan Kimia Makanan N-410">Laboratorium Kimia Organik/Biokimia dan Kimia Makanan N-410</option>
+        <option value="Ruang Kegiatan Akademik dan Kemahasiswaan Internal FPMIPA E-405">Ruang Kegiatan Akademik dan Kemahasiswaan Internal FPMIPA E-405</option>
+        <option value="Ruang Kegiatan Akademik dan Kemahasiswaan Internal FPMIPA E-406">Ruang Kegiatan Akademik dan Kemahasiswaan Internal FPMIPA E-406</option>
+        <option value="Laboratorium Kimia Fisik/Anorganik N-505">Laboratorium Kimia Fisik/Anorganik N-505</option>
+        <option value="Laboratorium Kimia Organik dan Biokimia N-510">Laboratorium Kimia Organik dan Biokimia N-510</option>
+        <option value="Laboratorium Kimia Instrumen N-519">Laboratorium Kimia Instrumen N-519</option>
+        <option value="Ruang B-105">Ruang B-105</option>
+        <option value="Laboratorium Komputasi Pemodelan Kimia B-106">Laboratorium Komputasi Pemodelan Kimia B-106</option>
+        <option value="Laboratorium Pembelajaran Fisika B-108">Laboratorium Pembelajaran Fisika B-108</option>
+        <option value="Ruang Kelas B-113">Ruang Kelas B-113</option>
+        <option value="Ruang Kelas B-114">Ruang Kelas B-114</option>
+        <option value="Ruang Kelas B-115">Ruang Kelas B-115</option>
+        <option value="Laboratorium Biologi IPSE B-201">Laboratorium Biologi IPSE B-201</option>
+        <option value="Ruang Kelas B-203">Ruang Kelas B-203</option>
+        <option value="IPSE Meeting Room B-204">IPSE Meeting Room B-204</option>
+        <option value="Ruang Kelas B-205">Ruang Kelas B-205</option>
+        <option value="Laboratorium Fisika IPSE B-207">Laboratorium Fisika IPSE B-207</option>
+        <option value="Laboratorium Multimedia IPSE B-209">Laboratorium Multimedia IPSE B-209</option>
+        <option value="Ruang Kelas B-210">Ruang Kelas B-210</option>
+        <option value="Laboratorium Kimia IPSE B-213">Laboratorium Kimia IPSE B-213</option>
+        <option value="Ruang Kelas B-301">Ruang Kelas B-301</option>
+        <option value="Ruang Kelas B-303">Ruang Kelas B-303</option>
+        <option value="Ruang Kelas B-304">Ruang Kelas B-304</option>
+        <option value="Ruang Kelas B-305">Ruang Kelas B-305</option>
+        <option value="Laboratorium Riset Bioteknologi B-307">Laboratorium Riset Bioteknologi B-307</option>
+        <option value="Microteaching Room B-309">Microteaching Room B-309</option>
+        <option value="Laboratorium Riset Bioteknologi 2 B-311">Laboratorium Riset Bioteknologi 2 B-311</option>
+        <option value="Laboratorium Media Pembelajaran B-314">Laboratorium Media Pembelajaran B-314</option>
+        <option value="Laboratorium Riset Kimia Makanan B-401">Laboratorium Riset Kimia Makanan B-401</option>
+        <option value="Laboratorium Riset B-403">Laboratorium Riset B-403</option>
+        <option value="Laboratorium Riset Kimia B-404">Laboratorium Riset Kimia B-404</option>
+        <option value="Ruangan Kelas B-405">Ruangan Kelas B-405</option>
+        <option value="Laboratorium Fisika Instrumentasi B-407">Laboratorium Fisika Instrumentasi B-407</option>
+        <option value="Laboratorium Fisika Komputasi B-408">Laboratorium Fisika Komputasi B-408</option>
+        <option value="Laboratorium Rekayasa Teknologi B-409/B-410">Laboratorium Rekayasa Teknologi B-409/B-410</option>
+        <option value="Laboratorium Kimia Material B-413">Laboratorium Kimia Material B-413</option>
+        <option value="Laboratorium Riset Kimia Lingkungan B-414">Laboratorium Riset Kimia Lingkungan B-414</option>
+        <option value="Ruang Kelas C-101">Ruang Kelas C-101</option>
+        <option value="Ruang Kelas C-102">Ruang Kelas C-102</option>
+        <option value="Ruang Kelas C-103">Ruang Kelas C-103</option>
+        <option value="Ruang Kelas C-104">Ruang Kelas C-104</option>
+        <option value="Ruang Kelas C-105">Ruang Kelas C-105</option>
+        <option value="Ruang Kelas C-106">Ruang Kelas C-106</option>
+        <option value="Ruang Kelas C-107">Ruang Kelas C-107</option>
+        <option value="Ruang Kelas C-108">Ruang Kelas C-108</option>
+        <option value="Laboratorium Praktikum C-201">Laboratorium Praktikum C-201</option>
+        <option value="Laboratorium Kecerdasan Buatan C-202">Laboratorium Kecerdasan Buatan C-202</option>
+        <option value="Laboratorium Sistem Jaringan dan Teknik Komputer C-203">Laboratorium Sistem Jaringan dan Teknik Komputer C-203</option>
+        <option value="Laboratorium Umum C-204">Laboratorium Umum C-204</option>
+        <option value="Laboratorium Digital, Pedagogik, dan Didactik C-205">Laboratorium Digital, Pedagogik, dan Didactik C-205</option>
+        <option value="Laboratorium Lingkungan Pembelajaran Cerdas C-206">Laboratorium Lingkungan Pembelajaran Cerdas C-206</option>
+        <option value="Laboratorium Rekayasa Perangkat Lunak dan Sistem Informasi C-207">Laboratorium Rekayasa Perangkat Lunak dan Sistem Informasi C-207</option>
+        <option value="RuangLaboratorium Pembelajaran C-208">RuangLaboratorium Pembelajaran C-208</option>
+        <option value="Ruang Kelas C-301">Ruang Kelas C-301</option>
+        <option value="Ruang Kelas C-302">Ruang Kelas C-302</option>
+        <option value="Ruang Kelas C-303">Ruang Kelas C-303</option>
+        <option value="Ruang Kelas C-304">Ruang Kelas C-304</option>
+        <option value="Ruang Kelas C-305">Ruang Kelas C-305</option>
+        <option value="Ruang Kelas C-306">Ruang Kelas C-306</option>
+        <option value="Ruang Kelas C-307">Ruang Kelas C-307</option>
+        <option value="Ruang Kelas C-308">Ruang Kelas C-308</option>
+        <option value="Ruang Kelas C-309">Ruang Kelas C-309</option>
+      </select>
+  <br>
+  <br>
+      <div>
+        <label for="tanggal">Tanggal</label>
+      </div>
+      <div class="tanggal">
+        <input type="date" name="tanggal">
+      </div>
+  <br>
+      <div>  
+        <label for="Jam Mulai">Jam Mulai</label>
+      </div>
+      <select type="jam" class="jam" name="jam">
+        <option selected disabled>Pilih Jam Mulai</option>
+        <option value="07:00">07:00</option>
+        <option value="07:50">07:50</option>
+        <option value="08:40">08:40</option>
+        <option value="09:30">09:30</option>
+        <option value="10:20">10:20</option>
+        <option value="11:10">11:10</option>
+        <option value="13:00">13:00</option>
+        <option value="13:50">13:50</option>
+        <option value="14:40">14:40</option>
+        <option value="15:30">15:30</option>
+        <option value="16:20">16:20</option>
+        <option value="17:10">17:10</option>
+      </select>
+  <br>
+  <br>
+      <div>
+        <label for="Durasi">Durasi (Dalam SKS)</label>
+      </div>
+      <select type="durasi" class="durasi" name="durasi">
+        <option selected disabled>Pilih Durasi</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary">
+        Submit
+    </button>
+</form>
+{% endblock %}

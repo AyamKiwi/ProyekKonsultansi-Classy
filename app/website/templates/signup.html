@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
+  content %}
+  <form method="POST">
+    <h3 align="center">Sign Up</h3>
+    <div class="form-group">
+      <label for="nim">NIM :</label>
+      <br />
+      <input
+        type="nim"
+        class="nim"
+        id="nim"
+        name="nim"
+        placeholder="Masukan NIM"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password0">Password :</label>
+      <br />
+      <input
+        type="password0"
+        class="password0"
+        id="password0"
+        name="password0"
+        placeholder="Masukkan Password"
+      />
+    </div>
+    <div class="form-group">
+      <label for="password1">Password (Konfirmasi) :</label>
+      <br />
+      <input
+        type="password1"
+        class="password1"
+        id="password1"
+        name="password1"
+        placeholder="Konfirmasi Password"
+      />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  {% endblock %}
+  
