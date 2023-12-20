@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+    <h1 align="center">Dev</h1>
+    <link rel="stylesheet" type="text/css" href="/css/datepicker.css">
+    <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+      $('.datepicker').datepicker()
+    </script>
+    
+    <form method="POST">
+      <div>
+        <label for="tanggal">Masukan tanggal hari senin pertama pada semester ini</label>
+      </div>
+      <div class="tanggal">
+        <input type="date" name="tanggal" required>
+      </div>
+      <div align="center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+    {% endblock %}
+    

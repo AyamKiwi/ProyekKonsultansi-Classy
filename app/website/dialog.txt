@@ -1,0 +1,4 @@
+
+Masukan tanggal senin pertama dengan format YYYY-MM-DD
+
+contoh: 2023-01-01

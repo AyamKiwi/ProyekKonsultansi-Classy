@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Admin
 from . import db
 from flask_login import login_user, logout_user, login_required, current_user
+import re
 
 auth = Blueprint('auth', __name__)
 
@@ -16,8 +17,10 @@ def login():
                 login_user(user, remember=True)
                 return redirect(url_for('views.admin'))
             else:
+                flash("Password salah, silahkan coba lagi", category='error')
                 return render_template("login.html", user=current_user)
         else:
+            flash('Akun tidak ditemukan, mohon Signup terlebih dahulu', category='error')
             return render_template("login.html", user=current_user)
     return render_template("login.html", user=current_user)
 
@@ -31,13 +34,16 @@ def logout():
 def signup():
     if request.method =='POST':
         nim = request.form.get('nim')
+        if re.search(nim, open('init_data/nim.csv', 'r').read()) is None:
+            flash('NIM anda tidak terdaftar. Mohon hubungi developer.', category='error')
+            return render_template("signup.html", user=current_user)
         if Admin.query.filter_by(nim = nim).first() is not None:
-            print("nim udah ada")
+            flash('Sudah ada akun dengan NIM tersebut. Silahkan login', category='error')
             return render_template("signup.html", user=current_user)
         password0 = request.form.get('password0')
         password1 = request.form.get('password1')
         if password0 != password1:
-            print("pasword beda")
+            flash('Password berbeda, mohon periksa kembali.', category='error')
             return render_template("signup.html", user=current_user)
         admin = Admin(
             nim = nim,
@@ -45,7 +51,6 @@ def signup():
         )
         db.session.add(admin)
         db.session.commit()
-        print("signup!")
+        flash('Signup berhasil, silahkan login', category='success')
         return redirect(url_for('auth.login'))
-    print("halo")
     return render_template("signup.html", user=current_user)

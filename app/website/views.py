@@ -1,8 +1,9 @@
 from datetime import datetime, timedelta
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import Matkul
 from . import db
 from flask_login import login_required, current_user
+import csv
 
 views = Blueprint('views', __name__)
 
@@ -107,12 +108,13 @@ def home():
         tanggal = datetime.strptime(tanggal_str + " " + jam_str, '%Y-%m-%d %H:%M')
         for ruangan in list_ruangan:
             available = True
-            for i in 0..durasi:
+            for i in range(0,durasi):
                 tanggal_check = tanggal + timedelta(minutes=(i*50))
                 if Matkul.query.filter_by(ruangan = ruangan, tanggal = tanggal_check).first() is not None:
                     available = False
             if available:
-                return redirect(url_for('views.result'))
+                hasil.append(ruangan)
+        return redirect(url_for('views.result'))
     return render_template("home.html", user=current_user)
 
 @views.route('/result')
@@ -123,26 +125,53 @@ def result():
 @login_required
 def admin():
     if request.method == 'POST':
-        ruangan = request.form.get('ruangan')
-        tanggal = request.form.get('tanggal')
-        jam_str = request.form.get('jam')
-        durasi_str = request.form.get('durasi')
-        if (not jam_str.isnumeric()) or (not durasi_str.isnumeric()):
-            return render_template("admin.html", user=current_user)
-        jam = int(jam_str)
-        durasi = int(durasi_str)
+        ruangan = str(request.form.get('ruangan'))
+        tanggal_str = str(request.form.get('tanggal'))
+        jam_str = str(request.form.get('jam'))
+        tanggal = datetime.strptime(tanggal_str + " " + jam_str, '%Y-%m-%d %H:%M')
+        durasi = int(request.form.get('durasi'))
         available = True
-        for jam_check in range(jam,jam+durasi):
-            if Matkul.query.filter_by(ruangan = ruangan, tanggal = tanggal, jam = jam_check).first() is not None:
+        for i in range(0, durasi):
+            tanggal_check = tanggal + timedelta(minutes=(i*50))
+            if Matkul.query.filter_by(ruangan = ruangan, tanggal = tanggal_check).first() is not None:
                 available = False
         if available:
-            for jam_jadwal in range(jam,jam+durasi):
+            for i in range(0, durasi):
                 jadwal = Matkul(
                     ruangan = ruangan,
-                    tanggal = tanggal,
-                    jam = jam_jadwal
+                    tanggal = tanggal + timedelta(minutes=(i*50))
                 )
                 db.session.add(jadwal)
                 db.session.commit()
-            return redirect(url_for('views.home'))
+            flash('Ruangan berhasil di booking!', category='success')
+        else:
+            flash('Ruangan tidak dapat di booking, mohon pilih ruangan lain atau waktu yang lain.', category='error')
     return render_template("admin.html", user=current_user)
+
+@views.route('/dev', methods=['GET', 'POST'])
+def init():
+    if request.method == 'POST':
+        tanggal_senin_pertama = str(request.form.get('tanggal'))
+        data = csv.DictReader(open('init_data/rekaptulasi.csv', 'r'))
+        for entry in data:
+            match entry['Hari']:
+                case "Senin":
+                    tanggal_base = datetime.strptime(tanggal_senin_pertama + " " + entry['Jam Mulai'], '%Y-%m-%d %H:%M') + timedelta(days=0)
+                case "Selasa":
+                    tanggal_base = datetime.strptime(tanggal_senin_pertama + " " + entry['Jam Mulai'], '%Y-%m-%d %H:%M') + timedelta(days=1)
+                case "Rabu":
+                    tanggal_base = datetime.strptime(tanggal_senin_pertama + " " + entry['Jam Mulai'], '%Y-%m-%d %H:%M') + timedelta(days=2)
+                case "Kamis":
+                    tanggal_base = datetime.strptime(tanggal_senin_pertama + " " + entry['Jam Mulai'], '%Y-%m-%d %H:%M') + timedelta(days=3)
+                case "Jumat":
+                    tanggal_base = datetime.strptime(tanggal_senin_pertama + " " + entry['Jam Mulai'], '%Y-%m-%d %H:%M') + timedelta(days=4)
+            for pekan_ke in range(0, 20):
+                for jam_ke in range(0, int(entry['Durasi'])):
+                    jadwal_matkul = Matkul(
+                        ruangan = entry['Ruangan'],
+                        tanggal = tanggal_base + timedelta(days=7*pekan_ke, minutes=50*jam_ke)
+                    )
+                    db.session.add(jadwal_matkul)
+                    db.session.commit()
+        return redirect(url_for('views.home'))
+    return render_template("dev.html", user = current_user)
